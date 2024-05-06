@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,56 +5,75 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { Pagination } from "swiper/modules";
-import { ServiceData } from "../../app/constraints/index";
+import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
+import "./gallary.css";
+import { IonIcon } from "@ionic/react";
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/free-mode";
-
-import { FreeMode } from "swiper/modules";
-
-import { RxArrowTopRight } from "react-icons/rx";
+import slide_image_1 from "./images/img_1.jpg";
+import slide_image_2 from "./images/img_2.jpg";
+import slide_image_3 from "./images/img_3.jpg";
+import slide_image_4 from "./images/img_4.jpg";
+import slide_image_5 from "./images/img_5.jpg";
+import slide_image_6 from "./images/img_6.jpg";
+import slide_image_7 from "./images/img_7.jpg";
 
 const Gallery: React.FC = () => {
   return (
-    <div className="flex items-center justify-center flex-col  ">
-      <h1 className="text-xl font-bold mt-8">Our Gallery</h1>
+    <div className="container">
+      <h1 className="heading mb-12 font-bold">Our Gallery</h1>
       <Swiper
-        breakpoints={{
-          340: {
-            slidesPerView: 2,
-            spaceBetween: 15,
-          },
-          700: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-          },
+        effect={"coverflow"}
+        grabCursor
+        centeredSlides
+        loop
+        slidesPerView="auto"
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 2.5,
         }}
-        freeMode={true}
-        pagination={{
-          clickable: true,
+        pagination={{ el: ".swiper-pagination", clickable: true }}
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
         }}
-        modules={[FreeMode, Pagination]}
-        className="max-w-[90%] lg:max-w-[80%]"
+        modules={[EffectCoverflow, Pagination, Navigation]}
+        className="swiper-container"
       >
-        {ServiceData.map((item) => (
-          <SwiperSlide key={item.title}>
-            <div className="flex flex-col gap-6 mb-20 group relative shadow-lg text-white rounded-xl px-6 py-8 h-[250px] w-[215px] lg:h-[400px] lg:w-[350px] overflow-hidden cursor-pointer">
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${item.backgroundImage})` }}
-              />
-              <div className="absolute inset-0 bg-black opacity-10 group-hover:opacity-50" />
-              <div className="relative flex flex-col gap-3">
-                <item.icon className="text-blue-600 group-hover:text-blue-400 w-[32px] h-[32px]" />
-                <h1 className="text-xl lg:text-2xl">{item.title} </h1>
-                <p className="lg:text-[18px]">{item.content} </p>
-              </div>
-              <RxArrowTopRight className="absolute bottom-5 left-5 w-[35px] h-[35px] text-white group-hover:text-blue-500 group-hover:rotate-45 duration-100" />
-            </div>
-          </SwiperSlide>
-        ))}
+        {/* Adding the images */}
+        <SwiperSlide>
+          <img src={slide_image_1.src} alt="Image 1" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={slide_image_2.src} alt="Image 2" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={slide_image_3.src} alt="Image 3" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={slide_image_4.src} alt="Image 4" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={slide_image_5.src} alt="Image 5" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={slide_image_6.src} alt="Image 6" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={slide_image_7.src} alt="Image 7" />
+        </SwiperSlide>
+
+        {/* Slider controls */}
+        <div className="slider-controller">
+          <div className="swiper-button-prev slider-arrow">
+            <IonIcon name="arrow-back-outline" />
+          </div>
+          <div className="swiper-button-next slider-arrow">
+            <IonIcon name="arrow-forward-outline" />
+          </div>
+          <div className="swiper-pagination" />
+        </div>
       </Swiper>
     </div>
   );
